@@ -22,7 +22,6 @@ source venv/bin/activate
 ``` powershell
 .\venv\Scripts\activate
 ```
-
 3. Install dependencies
 ```bash
 pip install -r requirements.txt
