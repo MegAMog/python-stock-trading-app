@@ -12,7 +12,7 @@ LIMIT=1000
 #API url
 url=f"https://api.polygon.io/v3/reference/tickers?market=stocks&active=true&order=asc&limit={LIMIT}&sort=ticker&apiKey={API_KEY}"
 
-
+#Get the first page of data
 response = requests.get(url)
 data = response.json()
 
@@ -22,6 +22,7 @@ for ticker in data['results']:
 
 error_pricing="You've exceeded the maximum requests per minute, please wait or upgrade your subscription to continue. https://polygon.io/pricing"
 
+#Get next pages of data
 while 'next_url' in data:
     response = requests.get(data['next_url']+f'&apiKey={API_KEY}')
     data = response.json()
@@ -32,8 +33,10 @@ while 'next_url' in data:
         for ticker in data['results']:
             tickers.append(ticker)
 
-output_csv='tickers.csv'
+#Write tickers data into csv-file
+output_csv='data/tickers.csv'
 fieldnames=list(tickers[0].keys())
+
 with open(output_csv, mode='w', newline='') as file:
     writer = csv.DictWriter(file, fieldnames=fieldnames)
     writer.writeheader()
@@ -41,4 +44,4 @@ with open(output_csv, mode='w', newline='') as file:
         row = {key: ticker.get(key,'') for key in fieldnames}
         writer.writerow(row)
 
-print(f'Wrote {len(tickers)} rows to {output_csv}')
+print(f'Wrote {len(tickers)} rows to {output_csv}.')
