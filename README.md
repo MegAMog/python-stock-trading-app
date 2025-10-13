@@ -39,6 +39,7 @@ Execute scheduler.py to automatically run script.py every 10 minutes:
 ```bash
 python3 scheduler.py
 ```
+**Note:** *The scheduler will wait 10 minutes before the first run. If you want to run the script immediately and then every 10 minutes, you need to modify the scheduler to run script.py once at startup.*
 
 ## Project Structure
 ```bash
