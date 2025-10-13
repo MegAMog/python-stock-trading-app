@@ -28,11 +28,17 @@ pip install -r requirements.txt
 ```
 
 ## Step 3. Run the App
-Run the main script.py with python or python3
+1. Run the main script
+Execute script.py using python or python3:
 ```bash
 python3 script.py
 ```
 
+2. Run the scheduler
+Execute scheduler.py to automatically run script.py every 10 minutes:
+```bash
+python3 scheduler.py
+```
 
 ## Project Structure
 ```bash
@@ -47,6 +53,7 @@ python3 script.py
 │   └── pyvenv.cfg
 ├── README.md
 ├── requirements.txt
+├── scheduler.py
 └── script.py
 ```
 
