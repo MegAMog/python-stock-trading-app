@@ -4999,7 +4999,6 @@ HRZN,Horizon Technology Finance Corporation,stocks,us,XNAS,CS,True,usd,000148742
 HSAI,"Hesai Group American Depositary Share, each ADS represents one Class B ordinary share",stocks,us,XNAS,CS,True,usd,0001861737,BBG01CCYDD47,BBG01CCYDDZ3,2025-10-13T06:05:20.441620896Z
 HSBC,HSBC Holdings PLC,stocks,us,XNYS,ADRC,True,usd,0001089113,BBG000C1K7N0,BBG001SCZVC0,2025-10-13T06:05:20.441620986Z
 HSBH,HSBC Holdings plc ADRhedged,stocks,us,ARCX,ETS,True,usd,,BBG01Q37TG78,BBG01Q37THL0,2025-10-13T06:05:20.441621076Z
-ticker,name,market,locale,primary_exchange,type,active,currency_name,cik,composite_figi,share_class_figi,last_updated_utc
 HSCS,HeartSciences Inc. Common Stock,stocks,us,XNAS,CS,True,usd,0001468492,BBG0185L0044,BBG0185L0106,2025-10-13T06:05:20.441621156Z
 HSCSW,HeartSciences Inc. Warrant,stocks,us,XNAS,WARRANT,True,usd,0001468492,BBG0185L9036,,2025-10-13T06:05:20.441621237Z
 HSCZ,iShares Currency Hedged MSCI EAFE Small-Cap ETF,stocks,us,ARCX,ETF,True,usd,0001100663,BBG009HYWS28,BBG009HYWS37,2025-10-13T06:05:20.441621317Z
@@ -10000,7 +9999,6 @@ STHO,Star Holdings Shares of Beneficial Interest,stocks,us,XNAS,CS,True,usd,0001
 STI,"Solidion Technology, Inc. Common Stock",stocks,us,XNAS,CS,True,usd,0001881551,BBG013KL70L2,BBG013KL71K1,2025-10-13T06:05:20.442145256Z
 STIM,"Neuronetics, Inc. Common Stock",stocks,us,XNAS,CS,True,usd,0001227636,BBG000QX36J1,BBG001SSSWY7,2025-10-13T06:05:20.442145376Z
 STIP,iShares 0-5 Year TIPS Bond ETF,stocks,us,ARCX,ETF,True,usd,0001100663,BBG0019SRJP8,BBG001TG5H89,2025-10-13T06:05:20.442145497Z
-ticker,name,market,locale,primary_exchange,type,active,currency_name,cik,composite_figi,share_class_figi,last_updated_utc
 STK,"Columbia Seligman Premium Technology Growth Fund, Inc.",stocks,us,XNYS,FUND,True,usd,0001471420,BBG000PNVDY1,BBG001T5SVR6,2025-10-13T06:05:20.442145597Z
 STKE,Sol Strategies Inc. Common Shares,stocks,us,XNAS,CS,True,usd,0001846839,BBG000BDVTD6,BBG001S8GYP0,2025-10-13T06:05:20.442145827Z
 STKH,Steakholder Foods Ltd. American Depositary Shares,stocks,us,XNAS,ADRC,True,usd,0001828098,BBG00ZCNPCX8,BBG00ZCNPDT1,2025-10-13T06:05:20.442145917Z
