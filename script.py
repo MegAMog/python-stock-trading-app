@@ -41,7 +41,7 @@ def run_stock_ticker_fetcher(API_KEY=None, next_url=None):
         if data.get("error")==error_pricing:
             break
         else:
-            next_url = data['next_url']
+            next_url = data.get('next_url','end')
             for ticker in data['results']:
                 tickers.append(ticker)
         
@@ -52,6 +52,9 @@ def run_stock_ticker_fetcher(API_KEY=None, next_url=None):
 
     # Extract CSV column names from the first ticker's keys
     fieldnames=list(tickers[0].keys())
+
+    # Check if the CSV file is not exist and is empty
+    write_header = not os.path.exists(output_csv) or os.path.getsize(output_csv) == 0
 
     # Write all ticker data into a CSV file
     with open(output_csv, mode='a', newline='') as file:
@@ -66,7 +69,7 @@ def run_stock_ticker_fetcher(API_KEY=None, next_url=None):
     return next_url, page_number
 
 if __name__ == "__main__":
-    next_url, page_number = run_stock_ticker_fetcher(next_url='https://api.polygon.io/v3/reference/tickers?cursor=YWN0aXZlPXRydWUmYXA9NTAwMCZhcz0mbGltaXQ9MTAwMCZtYXJrZXQ9c3RvY2tzJm9yZGVyPWFzYyZzb3J0PXRpY2tlcg')
+    next_url, page_number = run_stock_ticker_fetcher(next_url='https://api.polygon.io/v3/reference/tickers?cursor=YWN0aXZlPXRydWUmYXA9MTAwMDAmYXM9JmxpbWl0PTEwMDAmbWFya2V0PXN0b2NrcyZvcmRlcj1hc2Mmc29ydD10aWNrZXI')
     print(next_url)
     print(f"Fetched {page_number} tickers and saved to data/tickers.csv")
     
