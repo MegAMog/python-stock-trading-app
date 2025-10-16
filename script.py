@@ -2,6 +2,7 @@ import requests
 import os
 import csv
 import time
+import snowflake.connector
 
 from dotenv import load_dotenv
 # Load environment variables from .env file
@@ -50,23 +51,61 @@ def run_stock_ticker_fetcher(API_KEY=None):
             
             page_number+=data.get('count',0)
 
-    # Define output CSV file path
-    output_csv='data/tickers.csv'
+    # # Define output CSV file path
+    # output_csv='data/tickers.csv'
 
-    # Extract CSV column names from the first ticker's keys
-    fieldnames=list(tickers[0].keys())
+    # # Extract CSV column names from the first ticker's keys
+    # fieldnames=list(tickers[0].keys())
 
-    # Check if the CSV file is not exist and is empty
-    write_header = not os.path.exists(output_csv) or os.path.getsize(output_csv) == 0
+    # # Check if the CSV file is not exist and is empty
+    # write_header = not os.path.exists(output_csv) or os.path.getsize(output_csv) == 0
 
-    # Write all ticker data into a CSV file
-    with open(output_csv, mode='w', newline='') as file:
-        writer = csv.DictWriter(file, fieldnames=fieldnames)
-        writer.writeheader() # Write header row
-        for ticker in tickers:
-            # Write each ticker row, fill missing keys with empty string
-            row = {key: ticker.get(key,'') for key in fieldnames}
-            writer.writerow(row)
+    # # Write all ticker data into a CSV file
+    # with open(output_csv, mode='w', newline='') as file:
+    #     writer = csv.DictWriter(file, fieldnames=fieldnames)
+    #     writer.writeheader() # Write header row
+    #     for ticker in tickers:
+    #         # Write each ticker row, fill missing keys with empty string
+    #         row = {key: ticker.get(key,'') for key in fieldnames}
+    #         writer.writerow(row)
+
+
+    # Snowflake connection parameters from .env
+    SNOWFLAKE_USER = os.getenv("SNOWFLAKE_USER")
+    SNOWFLAKE_PASSWORD = os.getenv("SNOWFLAKE_PASSWORD")
+    SNOWFLAKE_ACCOUNT = os.getenv("SNOWFLAKE_ACCOUNT")
+    SNOWFLAKE_DATABASE = os.getenv("SNOWFLAKE_DATABASE")
+    SNOWFLAKE_SCHEMA = os.getenv("SNOWFLAKE_SCHEMA")
+    SNOWFLAKE_WAREHOUSE = os.getenv("SNOWFLAKE_WAREHOUSE")
+    SNOWFLAKE_ROLE = os.getenv("SNOWFLAKE_ROLE")
+
+    # Connect to Snowflake
+    cnct = snowflake.connector.connect(
+        user=SNOWFLAKE_USER,
+        password=SNOWFLAKE_PASSWORD,
+        account=SNOWFLAKE_ACCOUNT,
+        warehouse=SNOWFLAKE_WAREHOUSE,
+        database=SNOWFLAKE_DATABASE,
+        schema=SNOWFLAKE_SCHEMA,
+        role=SNOWFLAKE_ROLE
+    )
+    cs = cnct.cursor()
+
+    # Create table if not exists
+    fieldnames = list(tickers[0].keys())
+    columns = ', '.join([f'"{col.upper()}"' for col in fieldnames])
+    columns = columns+', DS'
+
+    # Insert data
+    placeholders = ", ".join(["%s"] * (len(fieldnames)+1))
+    insert_sql = f'INSERT INTO STOCK_TICKERS ({columns}) VALUES ({placeholders})'
+    for ticker in tickers:
+        values = [str(ticker.get(col, '')) for col in fieldnames]
+        values.append(time.strftime('%Y-%m-%d'))  # Add current date as DS
+        cs.execute(insert_sql, values)
+
+    cs.close()
+    cnct.close()
     
     return page_number
 
