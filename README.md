@@ -5,7 +5,15 @@ This project uses the [Polygon.io](https://polygon.io) API to extract stock mark
 * Register at [polygon.io](https://polygon.io) and generate your API key.
 * Create a `.env` file in the project root and add your key:
 ```env
-POLYGON_API_KEY = "your_api_key_here"
+POLYGON_API_KEY = 'your_api_key_here'
+
+SNOWFLAKE_ACCOUNT='your_account_here'
+SNOWFLAKE_USER='your_user_here'
+SNOWFLAKE_PASSWORD='your_password_here'
+SNOWFLAKE_WAREHOUSE='your_warehouse_here'
+SNOWFLAKE_DATABASE='your_database_here'
+SNOWFLAKE_SCHEMA='your_schema_here'
+SNOWFLAKE_ROLE='your_role_here'
 ```
 
 ## Step 2. Set Up the Environment
